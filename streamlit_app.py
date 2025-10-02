@@ -96,7 +96,7 @@ def generate_response(query, history):
 
     # Llamada a OpenAI con modelo gpt-4.1-mini
     response = openai.chat.completions.create(
-        model="gpt-5-nano",
+        model="gpt-4.1-nano",
         messages=api_messages,
         stream=True
     )
@@ -114,7 +114,7 @@ def response_from_query(user_prompt):
 
     if intent_code == "R002":
 
-        st.warning("Testimonio detectado")
+        #st.warning("Testimonio detectado")
 
         # Extraer texto de excel 
         casos_violencia = extract_xlsx_text("assets/xlsx/casos_violencia_obstetrica.xlsx")
@@ -170,7 +170,7 @@ def response_from_query(user_prompt):
 
     else: 
         # Solicitud estándar
-        st.warning("No se identificó caso de violencia obstétrica o ginecológica")
+        # st.warning("No se identificó caso de violencia obstétrica o ginecológica")
         stream_response = generate_response(user_prompt, st.session_state.history)
 
     # Mostrar respuesta del asistente y almacenar
