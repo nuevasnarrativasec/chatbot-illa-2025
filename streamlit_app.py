@@ -13,6 +13,7 @@ USER_AVATAR = "assets/avatars/user_avatar.png"
 # Configuración de API Key
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 openai.api_key = os.getenv('OPENAI_API_KEY')
+OPENAI_MODEL = st.secrets.get("OPENAI_MODEL", "gpt-4.1-mini")
 
 # Definimos zona horaria GMT-5 y obtenemos fecha actual
 tz = timezone(timedelta(hours=-5))
@@ -97,7 +98,7 @@ def generate_response(query, history):
 
     # Llamada a OpenAI con modelo gpt-4.1-mini
     response = openai.chat.completions.create(
-        model="gpt-4.1-nano",
+        model=OPENAI_MODEL,
         messages=api_messages,
         stream=True
     )
@@ -206,7 +207,7 @@ def micro_intent_query(user_prompt):
         {"role": "user", "content": user_prompt}
     ]
     response = openai.chat.completions.create(
-        model="gpt-4.1-nano",
+        model=OPENAI_MODEL,
         messages=api_messages,
         stream=False
     )
